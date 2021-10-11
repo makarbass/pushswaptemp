@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpatrici <bpatrici@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/11 14:49:26 by bpatrici          #+#    #+#             */
+/*   Updated: 2021/10/11 15:22:59 by bpatrici         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "push_swap.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -290,6 +303,38 @@ int	convert(char **strs, int **nums)
 	return (ret);
 }
 
+void	cleanup_1(char *str, char **strs)
+{
+	int	i;
+
+	i = 0;
+	free(str);
+	while (strs[i])
+		free(strs[i++]);
+	free(strs);
+}
+
+int is_sorted(int *nums)
+{
+	int i;
+
+	i = 0;
+	while (nums[i+1])
+	{
+		if (nums[i] <= nums[i+1])
+		{
+			printf("nums [i] in sort %d \n", nums[i]);
+			i++;
+		}
+		else
+		{
+			printf("NOT SORTED");
+			return(1);
+		}
+	}
+	printf("SORTED");
+	return(0);
+}
 
 int main(int argc, char **argv)
 {
@@ -297,27 +342,33 @@ int main(int argc, char **argv)
 	char	**strs;
 	int 	*nums;
 	int 	len;
+	t_list	*stack;
 
 	int i = 0; // counter
 
 	if (argc > 1)
 	{
 		nums = 0;
+		stack = 0;
+
 		str = ft_join(argv + 1, " "); // argv + 1 берём только переданные аргументы (без ./a.out)
 		printf("str : %s\n", str);	
 		strs = ft_split(str, ' '); // разделяем str по пробелам
-		while (strs[i])
+		while (strs[i]) // del from here ...
 		{
 			printf("strs [%d] : %s\n", i, strs[i]); 
 			i++;
 		}
-		i = 0; //counter
-		len = convert(strs, &nums); 
+		i = 0; //.. to here
+		len = convert(strs, &nums); // переводим массив строк в массив чисел
 		printf("len : %d \n", len);
-		while (i < len)
+		while (i < len) // del from here ...
 		{
 			printf("nums [%d] :%d\n", i, nums[i]);
 			i++;
 		}
+		i = 0; //.. to here
+		cleanup_1(str, strs); // free str, strs
+		is_sorted(nums);
 	}
 }
