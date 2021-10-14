@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpatrici <bpatrici@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bpatrici <bpatrici@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 14:49:26 by bpatrici          #+#    #+#             */
-/*   Updated: 2021/10/14 19:33:48 by bpatrici         ###   ########.fr       */
+/*   Updated: 2021/10/14 21:35:26 by bpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	main(int argc, char **argv)
 		strs = ft_split(str, ' ');
 		len = convert(strs, &nums);
 		if (!len)
-                {
-                        ft_putendl_fd("Error", 2);
-                        exit(1);
-                }
-                while (len--)
+		{
+			ft_putendl_fd("Error", 2);
+			exit(1);
+		}
+		while (len--)
 			ft_lstadd_front(&stack, ft_lstnew(&nums[len]));
 		if (!is_sorted(stack))
 			ft_sort(&stack);
