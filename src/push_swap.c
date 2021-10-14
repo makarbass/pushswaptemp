@@ -12,12 +12,6 @@
 
 #include "../include/push_swap.h"
 
-int ft_error(int i)
-{
-        ft_putendl_fd("Error", 2);
-        exit(i);
-}
-
 int	convert(char **strs, int **nums)
 {
 	int	i;
@@ -78,7 +72,10 @@ int	main(int argc, char **argv)
 		strs = ft_split(str, ' ');
 		len = convert(strs, &nums);
 		if (!len)
-                        ft_error(1);
+                {
+                        ft_putendl_fd("Error", 2);
+                        exit(1);
+                }
                 while (len--)
 			ft_lstadd_front(&stack, ft_lstnew(&nums[len]));
 		if (!is_sorted(stack))
